@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>To Do App</title>
+
+    <style>
+        body{
+            background-color: hsl(60, 12%, 94%);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Todo List</h1>
+        <button>Add Task</button><br>(when i click this task is added)
+        <button>Delete Task</button><br>(wehen i click this button, delted item)
+        <input type="checkbox">(this is for every item created)
+
+
+    </div>
+
+    <script>
+        const {createApp} = vue;
+
+        createApp (
+            {
+                setup() {
+
+                }
+            }
+        ).mount("#app")
+    </script>
+    
+</body>
+</html>
