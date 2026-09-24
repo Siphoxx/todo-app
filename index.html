@@ -15,19 +15,34 @@
 <body>
     <div id="app">
         <h1>Todo List</h1>
-        <button>Add Task</button><br>(when i click this task is added)
-        <button>Delete Task</button><br>(wehen i click this button, delted item)
-        <input type="checkbox">(this is for every item created)
+        <input type="text" ref="newTask" placeholder="new task">
+        <button>Add Task</button><br>
+        <!-- <input type="text"> -->
+         <p>New Task:{{newTask}}</p>
+         //the lists of tasks appear here and <br> task comes with delete and check inputs
+        <span><input type="checkbox">Task Completed</span><button>Delete Task</button><br>
 
-
-    </div>
+       </div>
 
     <script>
-        const {createApp} = vue;
+        const {createApp, ref} = Vue;
 
         createApp (
             {
                 setup() {
+                    const newTask = ref(" ");
+
+                    const taskArray = ref([""]);
+
+                    function anotherTask(){
+                        taskArray.push.value(taskArray[]);
+                    }
+
+                    return {
+                        newTask, 
+                    }
+                
+                    
 
                 }
             }
