@@ -10,6 +10,10 @@
         body{
             background-color: hsl(60, 12%, 94%);
         }
+        li.done {
+  text-decoration: line-through;
+  color: #999;
+}
     </style>
 </head>
 <body>
@@ -18,9 +22,9 @@
         <input type="text" v-model="newTask" placeholder="new task">
         <button @click="addTask">Add Task</button><br>
         <ul>
-            <li v-for="task in tasks" :key="task.id">
-                {{tasks.text}}
-                
+            <li v-for="task in tasks" :key="task.id" :class = "{ done: task.done}">
+                <input type="checkbox" v-model="task.done"/>
+                {{task.text}}                
             </li>
         </ul>
 
