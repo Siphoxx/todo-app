@@ -24,9 +24,11 @@
         <ul>
             <li v-for="task in tasks" :key="task.id" :class = "{ done: task.done}">
                 <input type="checkbox" v-model="task.done"/>
-                {{task.text}}                
+                {{task.text}} 
+                <button @click="removeTask(task.id)">Delete</button>               
             </li>
         </ul>
+        <p>{{ remaining }} tasks remaining</p>
 
       
          
@@ -35,13 +37,12 @@
        </div>
 
     <script>
-        const {createApp, ref} = Vue;
+        const {createApp, ref, computed} = Vue;
 
         createApp (
             {
                 setup() {
                     const newTask = ref("");
-
                     const tasks = ref([]);
 
                     function addTask(){
@@ -51,18 +52,34 @@
                             id: Date.now(),
                             text: text,
                             done:false,
-                        })
+                            
+                        });
+                          newTask.value = "";
 
-                        newTask.value = "";
+}
 
+                      
+
+                        
+                        function removeTask(id) {
+  tasks.value = tasks.value.filter((task) => task.id !== id);}
+
+  const remaining= computed(()=>{
+    return tasks.value.filter((task)=> !task.done).length;
+
+  });
+
+  
                        
                         
-                    }
+                    
 
                     return {
                         newTask, 
                         tasks,
                         addTask,
+                        removeTask,
+                        remaining
                     };
                 
                     
