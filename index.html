@@ -15,12 +15,18 @@
 <body>
     <div id="app">
         <h1>Todo List</h1>
-        <input type="text" ref="newTask" placeholder="new task">
-        <button @ckick="anotherTask">Add Task</button><br>
-        <!-- <input type="text"> -->
-         <p>New Task:{{newTask9}}</p>
-         //the lists of tasks appear here and <br> task comes with delete and check inputs
-        <span><input type="checkbox">Task Completed</span><button>Delete Task</button><br>
+        <input type="text" v-model="newTask" placeholder="new task">
+        <button @click="addTask">Add Task</button><br>
+        <ul>
+            <li v-for="task in tasks" :key="task.id">
+                {{tasks.text}}
+                
+            </li>
+        </ul>
+
+      
+         
+  
 
        </div>
 
@@ -30,20 +36,30 @@
         createApp (
             {
                 setup() {
-                    const newTask = ref(" ");
+                    const newTask = ref("");
 
-                    const taskArray = ref([""]);
+                    const tasks = ref([]);
 
-                    function anotherTask(){
-                        taskArray.value.push(id:,
-                            text:,
-                            done:,
-                        )
+                    function addTask(){
+                        const text = newTask.value.trim();
+                        if(!text) return;
+                        tasks.value.push({
+                            id: Date.now(),
+                            text: text,
+                            done:false,
+                        })
+
+                        newTask.value = "";
+
+                       
+                        
                     }
 
                     return {
                         newTask, 
-                    }
+                        tasks,
+                        addTask,
+                    };
                 
                     
 
