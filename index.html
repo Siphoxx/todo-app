@@ -11,7 +11,7 @@
             background-color: hsl(60, 12%, 94%);
         }
         li.done {
-  text-decoration: line-through;
+        text-decoration: line-through;
   color: #999;
 }
     </style>
@@ -37,13 +37,13 @@
        </div>
 
     <script>
-        const {createApp, ref, computed} = Vue;
+        const {createApp, ref, computed, watch} = Vue;
 
         createApp (
             {
                 setup() {
                     const newTask = ref("");
-                    const tasks = ref([]);
+                    const tasks = ref(JSON.parse(localStorage.getItem("tasks") || "[]"));
 
                     function addTask(){
                         const text = newTask.value.trim();
@@ -56,9 +56,7 @@
                         });
                           newTask.value = "";
 
-}
-
-                      
+}                    
 
                         
                         function removeTask(id) {
@@ -67,7 +65,11 @@
   const remaining= computed(()=>{
     return tasks.value.filter((task)=> !task.done).length;
 
-  });
+   
+  }); watch(tasks, (newValue)=>{
+        localStorage.setItem("tasks", JSON.stringify(newValue))
+    }, {deep: true}
+    )
 
   
                        
